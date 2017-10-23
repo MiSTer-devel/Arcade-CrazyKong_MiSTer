@@ -1,0 +1,30 @@
+---------------------------------------------------------------------------------
+-- 
+-- Arcade: Crazy Kong port to MiSTer by Sorgelig
+-- 24 October 2017
+-- 
+---------------------------------------------------------------------------------
+-- Crazy Kong (Falcon) FPGA - DAR - 2014
+-- http://darfpga.blogspot.fr
+---------------------------------------------------------------------------------
+-- T80/T80se - Version : 0247
+-----------------------------
+-- Z80 compatible microprocessor core
+-- Copyright (c) 2001-2002 Daniel Wallner (jesus@opencores.org)
+---------------------------------------------------------------------------------
+-- 
+-- Support screen and controls rotation on HDMI output.
+-- Only controls are rotated on VGA output.
+-- 
+-- 
+-- Keyboard inputs :
+--
+--   F3          : Add coin
+--   F1          : Start
+--   UP,DOWN,LEFT,RIGHT arrows : Movements
+--   SPACE       : Jump
+--
+-- Joystick support.
+-- 
+-- 
+---------------------------------------------------------------------------------
