@@ -22,10 +22,10 @@ port(
 
   joy_pcfrldu  : in std_logic_vector(6 downto 0);
   sound_string : out std_logic_vector(15 downto 0);
-  sram_addr    : out std_logic_vector(16 downto 0);
-  sram_we      : out std_logic;
-  sram_di      : in std_logic_vector(7 downto 0);
-  sram_do      : out std_logic_vector(7 downto 0)
+
+  dn_addr      : in  std_logic_vector(16 downto 0);
+  dn_data      : in  std_logic_vector(7 downto 0);
+  dn_wr        : in  std_logic
 );
 end ckong;
 
@@ -125,6 +125,12 @@ signal coins    : std_logic_vector(7 downto 0);
 -- frame counter for debug 
 signal vsync_r : std_logic;
 signal frame_counter : std_logic_vector(15 downto 0) := X"0000";
+
+signal sram_addr    : std_logic_vector(16 downto 0);
+signal sram_we      : std_logic;
+signal sram_di      : std_logic_vector(7 downto 0);
+signal sram_do      : std_logic_vector(7 downto 0);
+signal rom_cs       : std_logic;
 
 begin
 
@@ -579,6 +585,7 @@ port map(
 
 ckong_sound : entity work.ckong_sound
 port map(
+  clock_12mhz  => clock_12mhz,
   cpu_clock    => cpu_clock,
   cpu_addr     => cpu_addr,
   cpu_data     => cpu_data,
@@ -587,7 +594,27 @@ port map(
   reg5_we_n    => reg5_we_n,
   reg6_we_n    => reg6_we_n,
   ym_2149_data => ym_8910_data,
-  sound_sample => sound_string
+  sound_sample => sound_string,
+  dn_addr      => dn_addr,
+  dn_data      => dn_data,
+  dn_wr        => dn_wr
+);
+
+rom_cs <= '1' when dn_addr(16 downto 13) < "1011" else '0';
+
+sram : work.dpram generic map (17,8)
+port map
+(
+	clock_a   => clock_12mhz,
+	wren_a    => dn_wr and rom_cs,
+	address_a => dn_addr(16 downto 0),
+	data_a    => dn_data,
+
+	clock_b   => not clock_12mhz,
+	wren_b    => sram_we,
+	address_b => sram_addr,
+	data_b    => sram_do,
+	q_b       => sram_di
 );
 
 end architecture;

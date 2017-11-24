@@ -6,6 +6,7 @@ use ieee.std_logic_1164.all,ieee.numeric_std.all;
 
 entity ckong_sound is
 port	(
+	clock_12mhz  : in std_logic;
 	cpu_clock    : in std_logic;
 	cpu_addr     : in std_logic_vector(15 downto 0);
 	cpu_data     : in std_logic_vector( 7 downto 0);
@@ -14,7 +15,10 @@ port	(
 	reg5_we_n    : in std_logic;
 	reg6_we_n    : in std_logic;
 	ym_2149_data : out std_logic_vector(7 downto 0);
-	sound_sample : out std_logic_vector(15 downto 0)
+	sound_sample : out std_logic_vector(15 downto 0);
+	dn_addr      : in  std_logic_vector(16 downto 0);
+	dn_data      : in  std_logic_vector(7 downto 0);
+	dn_wr        : in  std_logic
 );
 end ckong_sound;
 
@@ -39,6 +43,8 @@ signal sample_cnt      : std_logic_vector(11 downto 0);
 signal sample_rom_addr : std_logic_vector(12 downto 0);
 signal sound_data      : std_logic_vector( 7 downto 0);
 signal sample_data     : std_logic_vector(3 downto 0);
+
+signal rom_cs          : std_logic;
 
 begin
 
@@ -111,11 +117,19 @@ sample_data <= sound_data(3 downto 0) when sample_cnt(0) = '0' else sound_data(7
 sound_sample <= std_logic_vector(( "00" & unsigned(ym_2149_audio) & "000000") + unsigned("0" & sample_data & "00000000000"));
 ------
 
-sample_rom : entity work.ckong_samples
-port map (
-	addr  => sample_rom_addr,
-	clk   => cpu_clock, 
-	data  => sound_data
+rom_cs <= '1' when dn_addr(16 downto 13) = "1011" else '0';
+
+sample_rom : work.dpram generic map (13,8)
+port map
+(
+	clock_a   => clock_12mhz,
+	wren_a    => dn_wr and rom_cs,
+	address_a => dn_addr(12 downto 0),
+	data_a    => dn_data,
+
+	clock_b   => cpu_clock,
+	address_b => sample_rom_addr,
+	q_b       => sound_data
 );
 
 ym2149 : entity work.ym2149
