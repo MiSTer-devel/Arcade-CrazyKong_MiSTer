@@ -23,6 +23,8 @@
 --   UP,DOWN,LEFT,RIGHT arrows : Movements
 --   SPACE       : Jump
 --
+-- TODO: player two support doesn't work corectly
+--
 -- Joystick support.
 -- 
 -- 

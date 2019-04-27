@@ -19,8 +19,10 @@ port(
   hblank       : out std_logic;
   vblank       : out std_logic;
   vce          : out std_logic;
-
+  
+  dip_sw  : in std_logic_vector(7 downto 0);
   joy_pcfrldu  : in std_logic_vector(6 downto 0);
+  joy_pcfrldu2  : in std_logic_vector(6 downto 0);
   sound_string : out std_logic_vector(15 downto 0);
 
   dn_addr      : in  std_logic_vector(16 downto 0);
@@ -120,6 +122,7 @@ signal ym_8910_data : std_logic_vector(7 downto 0);
 
 -- player I/O : one player only atm
 signal player1  : std_logic_vector(7 downto 0);
+signal player2  : std_logic_vector(7 downto 0);
 signal coins    : std_logic_vector(7 downto 0);
 
 -- frame counter for debug 
@@ -150,7 +153,8 @@ video_vs    <= vsync;
 -- player controls
 ------------------
 player1 <= ( joy_pcfrldu(3) & joy_pcfrldu(2) & joy_pcfrldu(1) & joy_pcfrldu(0) & joy_pcfrldu(4) & "000" );
-coins   <= not( "00000" & joy_pcfrldu(5) & joy_pcfrldu(6) & '0');
+player2 <= ( joy_pcfrldu2(3) & joy_pcfrldu2(2) & joy_pcfrldu2(1) & joy_pcfrldu2(0) & joy_pcfrldu2(4) & "000" );
+coins   <= not( "0000" & joy_pcfrldu2(5) & joy_pcfrldu(5) & joy_pcfrldu(6) & joy_pcfrldu2(6));
 
 -----------------------
 -- cpu write addressing
@@ -192,8 +196,9 @@ end process;
 ------------------------------------
 with cpu_addr(15 downto 11) select 
 	cpu_di_mem <=
-		"00000000"       when "10110", -- dip switch
+		dip_sw           when "10110", -- dip switch
 		player1          when "10100",
+		player2          when "10101",
 		coins            when "10111",
 		sram_data_to_cpu when others;
 
