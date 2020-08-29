@@ -1,31 +1,22 @@
 <misterromdescription>
 	<name>Crazy Kong Part II (set 1)</name>
-	<mameversion>0220</mameversion>
+	<mameversion>0223</mameversion>
 	<setname>ckongpt2</setname>
-	<mratimestamp>20200427161917</mratimestamp>
+	<mratimestamp>20200829162800</mratimestamp>
 	<year>1981</year>
 	<manufacturer>Falcon</manufacturer>
 	<category>Maze / Monkeys</category>
 	<category>Platform</category>
 	<category>Platform / Mario Bros.</category>
-	<rbf>crazykong</rbf>
+	<rbf>CrazyKong</rbf>
+	<buttons names="Jump,Start 1P,Coin" default="A,Start,Select"/>
 	<rom index="0" zip="ckongpt2.zip" md5="a7e585c59a92577f1b4e7c583e143ea8">
 		<part crc="b27df032" name="7.5d"/>
 		<part crc="5dc1aaba" name="8.5e"/>
 		<part crc="c9054c94" name="9.5h"/>
 		<part crc="069c4797" name="10.5k"/>
 		<part crc="ae159192" name="11.5l"/>
-		<part crc="966bc9ab" name="12.5n"/>
-		<part crc="966bc9ab" name="12.5n"/>
-		<part crc="966bc9ab" name="12.5n"/>
-		<part crc="966bc9ab" name="12.5n"/>
-		<part crc="966bc9ab" name="12.5n"/>
-		<part crc="966bc9ab" name="12.5n"/>
-		<part crc="966bc9ab" name="12.5n"/>
-		<part crc="966bc9ab" name="12.5n"/>
-		<part crc="966bc9ab" name="12.5n"/>
-		<part crc="966bc9ab" name="12.5n"/>
-		<part crc="966bc9ab" name="12.5n"/>
+		<part crc="966bc9ab" name="12.5n" repeat="11"/>
 		<part crc="2dcedd12" name="6.11n"/>
 		<part crc="fa7cbd91" name="5.11l"/>
 		<part crc="3375b3bd" name="4.11k"/>
