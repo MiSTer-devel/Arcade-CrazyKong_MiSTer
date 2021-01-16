@@ -140,8 +140,8 @@ localparam CONF_STR = {
 	"OC,Cabinet,Upright,Cocktail;",
 	"-;",
 	"R0,Reset;",
-	"J1,Jump,Start 1P,Coin;",
-	"jn,A,Start,R;",
+	"J1,Jump,Start 1P,Start 2p,Coin;",
+	"jn,A,Start,Select,R;",
 	"V,v",`BUILD_DATE
 };
 
@@ -205,7 +205,7 @@ hps_io #(.STRLEN($size(CONF_STR)>>3)) hps_io
 );
 
 
-wire no_rotate = status[2] & ~direct_video;
+wire no_rotate = status[2] | direct_video;
 
 wire m_up     = joy[3];
 wire m_down   = joy[2];
@@ -221,7 +221,8 @@ wire m_fire_2  = joy[4];
 
 
 wire m_start1 = joy[5];
-wire m_coin   = joy[6];
+wire m_start2 = joy[6];
+wire m_coin   = joy[7];
 
 wire ce_vid;
 
