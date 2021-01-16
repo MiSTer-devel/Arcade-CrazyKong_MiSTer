@@ -8,7 +8,7 @@
 	<category>Platform</category>
 	<category>Platform / Mario Bros.</category>
 	<rbf>CrazyKong</rbf>
-	<buttons names="Jump,Start 1P,Coin" default="A,Start,Select"/>
+	<buttons names="Jump,Start 1P,Start 2P,Coin" default="A,Start,Select,R"/>
 	<rom index="0" zip="ckong.zip|ckongo.zip|bigkong.zip" md5="fa1d74555f5c450c4f22f6eea0b13f16" type="merged|split">
 		<part crc="8bfb4623" name="o55a-1"/>
 		<part crc="9ae8089b" name="o55a-2"/>
