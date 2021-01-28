@@ -135,6 +135,9 @@ signal sram_di      : std_logic_vector(7 downto 0);
 signal sram_do      : std_logic_vector(7 downto 0);
 signal rom_cs       : std_logic;
 
+signal big_sprite_palette_cs  : std_logic;
+signal palette_cs 				: std_logic;
+
 begin
 
 ------------------
@@ -552,20 +555,52 @@ port map (
 	cpu_clock  => cpu_clock
 );
 
-palette : entity work.ckong_palette
-port map (
-	addr => pixel_color_r,
-	clk   => clock_12mhz,
-	data       => do_palette 
+--ckong_palette - prom.v6 followed by prom.u6
+--palette : entity work.ckong_palette
+--port map (
+--	addr => pixel_color_r,
+--	clk   => clock_12mhz,
+--	data       => do_palette 
+--);
+
+palette_cs <= '1' when dn_addr(16 downto 6) = "11000000000" else '0';
+--0000 0001 0110 0000 0000 0000
+--       16 15    11  7    3
+palette : work.dpram generic map (6,8)
+port map
+(
+	clock_a   => clock_12mhz,
+	wren_a    => dn_wr and palette_cs,
+	address_a => dn_addr(5 downto 0),
+	data_a    => dn_data,
+
+	clock_b   => clock_12mhz,
+	address_b => pixel_color_r,
+	q_b       => do_palette
 );
 
-big_sprite_palette : entity work.ckong_big_sprite_palette
-port map (
-	addr  => big_sprite_pixel_color,
-	clk   => clock_12mhz,
-	data  => do_big_sprite_palette 
-);
 
+big_sprite_palette_cs <= '1' when dn_addr(16 downto 5) = "110000000010" else '0';
+
+-- prom.t6
+--big_sprite_palette : entity work.ckong_big_sprite_palette
+--port map (
+--	addr  => big_sprite_pixel_color,
+--	clk   => clock_12mhz,
+--	data  => do_big_sprite_palette 
+--);
+big_sprite_palette : work.dpram generic map (5,8)
+port map
+(
+	clock_a   => clock_12mhz,
+	wren_a    => dn_wr and big_sprite_palette_cs,
+	address_a => dn_addr(4 downto 0),
+	data_a    => dn_data,
+
+	clock_b   => clock_12mhz,
+	address_b => big_sprite_pixel_color,
+	q_b       => do_big_sprite_palette
+);
 Z80 : entity work.T80s
 generic map(Mode => 0, T2Write => 1, IOWait => 1)
 port map(
@@ -604,6 +639,7 @@ port map(
   dn_data      => dn_data,
   dn_wr        => dn_wr
 );
+
 
 rom_cs <= '1' when dn_addr(16 downto 13) < "1011" else '0';
 
