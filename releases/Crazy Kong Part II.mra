@@ -10,7 +10,7 @@
 	<category>Platform / Mario Bros.</category>
 	<rbf>CrazyKong</rbf>
 	<buttons names="Jump,Start 1P,Start 2P,Coin" default="A,Start,Select,R"/>
-	<rom index="0" zip="ckongpt2.zip" md5="a7e585c59a92577f1b4e7c583e143ea8">
+	<rom index="0" zip="ckongpt2.zip" md5="none">
 		<part crc="b27df032" name="7.5d"/>
 		<part crc="5dc1aaba" name="8.5e"/>
 		<part crc="c9054c94" name="9.5h"/>
@@ -27,5 +27,8 @@
 		<part crc="a7a2fdbd" name="1.11a"/>
 		<part crc="5f0bcdfb" name="14.5s"/>
 		<part crc="9003ffbd" name="13.5p"/>
+		<part crc="b3fc1505" name="prom.v6"/>
+		<part crc="26aada9e" name="prom.u6"/>
+		<part crc="676b3166" name="prom.t6"/>
 	</rom>
 </misterromdescription>
