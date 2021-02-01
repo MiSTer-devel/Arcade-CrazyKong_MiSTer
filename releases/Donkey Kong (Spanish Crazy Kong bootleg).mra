@@ -66,9 +66,9 @@ FD3F069315231322191215FD2425FD1E
 		<part crc="520fa4de" name="falcon10" offset="2050" length="833"/>
 		<part>00</part>
 		<part crc="520fa4de" name="falcon10" offset="2884" length="1212"/>
-		<part crc="0a571a0f" name="falcon11" offset="0" length="3106"/>
+		<part crc="327dcadf" name="falcon11" offset="0" length="3106"/>
 		<part>A7CABE07AF773C3C322560C3AC01</part>
-		<part crc="0a571a0f" name="falcon11" offset="3120" length="721"/>
+		<part crc="327dcadf" name="falcon11" offset="3120" length="721"/>
 		<part>
 A593018593018A93016593016A930446
 9306059301E59201EA9201C59201CA92
@@ -82,7 +82,7 @@ C59102A7910486910265910269910625
 2D91010D9101129101ED9001F09001F2
 9001CD9003D09000
 		</part>
-		<part crc="0a571a0f" name="falcon11" offset="4009" length="87"/>
+		<part crc="327dcadf" name="falcon11" offset="4009" length="87"/>
 		<part repeat="45056">00</part>
 		<!-- gfx1 -->
 		<part crc="a8916dc8" name="falcon6"/>
