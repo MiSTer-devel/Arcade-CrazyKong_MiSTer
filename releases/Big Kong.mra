@@ -1,6 +1,6 @@
 <misterromdescription>
 	<name>Big Kong</name>
-	<mameversion>0223</mameversion>
+	<mameversion>0224</mameversion>
 	<setname>bigkong</setname>
 	<year>1981</year>
 	<manufacturer>bootleg</manufacturer>
@@ -9,23 +9,29 @@
 	<category>Platform / Mario Bros.</category>
 	<rbf>CrazyKong</rbf>
 	<buttons names="Jump,Start 1P,Start 2P,Coin" default="A,Start,Select,R"/>
-	<rom index="0" zip="ckong.zip|bigkong.zip|ckongo.zip" md5="none" type="merged|split">
+	<rom index="0" zip="ckong.zip|bigkong.zip|ckongo.zip" md5="50f7e8b81dd675d2c260151bc6764059" type="merged|nonmerged|split">
+		<!-- maincpu -->
 		<part crc="4c9102f1" name="dk01f7_2532.d5"/>
 		<part crc="1683e9ae" name="dk02f8_2532.f5"/>
 		<part crc="073eea32" name="dk03f9_2532.h5"/>
 		<part crc="0aab0334" name="dk04f10_2532.k5"/>
 		<part crc="45be1c6a" name="dk05f11_2532.l5"/>
-		<part crc="966bc9ab" name="n05-12.bin" repeat="11"/>
+		<part crc="966bc9ab" name="n05-12.bin"/>
+		<part repeat="40960">00</part>
+		<!-- gfx1 -->
 		<part crc="2dcedd12" name="n11-06.bin"/>
 		<part crc="fa7cbd91" name="l11-05.bin"/>
 		<part crc="3375b3bd" name="k11-04.bin"/>
 		<part crc="5655cc11" name="h11-03.bin"/>
+		<!-- gfx2 -->
 		<part crc="d1352c31" name="c11-02.bin"/>
 		<part crc="a7a2fdbd" name="a11-01.bin"/>
 		<part crc="d1352c31" name="c11-02.bin"/>
 		<part crc="a7a2fdbd" name="a11-01.bin"/>
+		<!-- cclimber_audio:samples -->
 		<part crc="5f0bcdfb" name="cc13j.bin"/>
 		<part crc="9003ffbd" name="cc12j.bin"/>
+		<!-- proms -->
 		<part crc="b3fc1505" name="prom.v6"/>
 		<part crc="26aada9e" name="prom.u6"/>
 		<part crc="676b3166" name="prom.t6"/>
