@@ -111,7 +111,7 @@ localparam CONF_STR = {
 	"R0,Reset;",
 	"J1,Jump,Start 1P,Coin;",
 	"jn,A,Start,R;",
-	"jp,B,Start,Select;",
+	"jp,B,Start,R;",
 	"V,v",`BUILD_DATE
 };
 
@@ -241,8 +241,8 @@ wire m_right_2  = no_rotate ? btn_up_2    | joy[3] : btn_right_2 | joy[0];
 wire m_fire_2  = btn_fire_2|joy[4];
 
 
-wire m_start1 = btn_one_player  | joy[5];
-wire m_coin   = m_start1 | joy[6];
+wire m_start1 = btn_start_1 | btn_one_player | joy[5];
+wire m_coin   = btn_coin_1 | joy[6];
 
 wire ce_vid;
 
